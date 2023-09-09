@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Poller+One&family=Poppins:wght@400;700&display=swap');
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+    position: relative;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 24px;
+    padding-right: 24px;
+    width: 100%;
+}
+
+#id-name {
+    /* css */
+}
+
+.cool-title {
+    font-family: 'Poller One', cursive;
+    font-size: 24px;
+}
+
+.main-section {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.biggest-title {
+    color: #2E47AA;
+    font-size: 64px;
+    font-weight: bold;
+}
+
+p {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+button {
+    background-color: #2E47AA;
+    padding: 16px 16px 16px 16px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 8px 8px 8px 8px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+}
