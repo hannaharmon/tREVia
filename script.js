@@ -5,6 +5,7 @@ const GAME_WIDTH = 800;
 const GAME_HEIGHT = 200;
 
 let scaleRatio = null;
+let previousTime = null;
 
 function setScreen(){
     scaleRatio = getScaleRatio();
@@ -41,5 +42,29 @@ function getScaleRatio() {
         // Window is taller
         return screenHeight / GAME_HEIGHT;
     }
- 
 }
+
+function clearScreen() {
+    ctx.fillStyle = "white";
+    ctx.fillRect(0,0,canvas.width, canvas.height);
+}
+
+function gameLoop(currentTime) {
+    if (previousTime === null) {
+        // Will be entered on first call of gameLoop
+        previousTime = currentTime;
+        requestAnimationFrame(gameLoop);
+        return;
+    }
+    // Calculate the change in frameTime
+    // This will be used later to ensure evreything moves at the same speed
+    // regardless of hardware differences
+    const frameTimeDelta = currentTime - previousTime;
+    previousTime = currentTime;
+    clearScreen();
+    // Speed at which gameLoop is called is dependent on monitor refresh rate
+    // and hardware of computer
+    requestAnimationFrame(gameLoop);
+}
+
+requestAnimationFrame(gameLoop);    // Calls a method when ready to repaint screen
