@@ -19,12 +19,16 @@ const BACKGROUND_WIDTH = 1280;
 const BACKGROUND_HEIGHT = 128;
 const BACKGROUND_SPEED = 0.3;
 const GROUND_AND_OBSTACLES_SPEED = 0.3;
+const TRIVIA_TIME = 10;
 
 const OBSTACLES_CONFIG = [
     {width:64, height:64, image: 'Images/Longhorn.png'},
     {width:64, height:128, image: 'Images/VeoInTree.png'},
     {width:106, height:64, image: 'Images/ElephantWalk.png'},
 ];
+
+let uhh = true;
+var refreshIntervalId;
 
 // Game Objects
 let player = null;
@@ -81,8 +85,10 @@ function createSprites() {
         scaleRatio, 
         GROUND_AND_OBSTACLES_SPEED
     );
+    
+    const searchParams = new URLSearchParams(window.location.search);
+    score = new Score(ctx, scaleRatio, parseInt(searchParams.get("score")||"0"));
 
-    score = new Score(ctx, scaleRatio);
 }
 
 function setScreen(){
@@ -123,6 +129,10 @@ function getScaleRatio() {
     }
 }
 
+function triggerTrivia() {
+    window.open(`http://127.0.0.1:5500/triviatest.html?score=${score.score}`,"_self");
+}
+
 function showGameOver() {
     const fontSize = 70 * scaleRatio;
     ctx.font = `${fontSize}px Verdana`;
@@ -152,8 +162,15 @@ function reset() {
     // Tell game objects to reset
     background.reset();
     obstaclesController.reset();
-    score.reset();
+    searchParams = new URLSearchParams(window.location.search);
+    let paramScore = searchParams.get("score");
+    if (!paramScore) {
+        score.reset();
+    }
     gameSpeed = GAME_SPEED_START;
+    const searchParams = new URLSearchParams(window.location.search);
+    score = new Score(ctx, scaleRatio, parseInt(searchParams.get("score")));
+    console.log(score.score);
 }
 
 function showStartGameText() {
@@ -177,13 +194,7 @@ function clearScreen() {
 }
 
 function gameLoop(currentTime) {
-    console.log(gameSpeed);
-    if (previousTime === null) {
-        // Will be entered on first call of gameLoop
-        previousTime = currentTime;
-        requestAnimationFrame(gameLoop);
-        return;
-    }
+    
     // Calculate the change in frameTime
     // This will be used later to ensure evreything moves at the same speed
     // regardless of hardware differences
@@ -194,6 +205,10 @@ function gameLoop(currentTime) {
 
     if (!gameOver && !waitingToStart) {
         // Update game objects
+        if (uhh) {
+            refreshIntervalId = setInterval(function () {triggerTrivia()}, 10000);
+            uhh = false;
+        }
         background.update(gameSpeed, frameTimeDelta);
         obstaclesController.update(gameSpeed, frameTimeDelta);
         player.update(gameSpeed, frameTimeDelta);
@@ -216,6 +231,8 @@ function gameLoop(currentTime) {
 
     // Game over screen
     if (gameOver) {
+        clearInterval(refreshIntervalId);
+        score.score = 0;
         showGameOver();
     }
 

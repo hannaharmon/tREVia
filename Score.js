@@ -1,11 +1,11 @@
 export default class Score{
-    score = 0;
     HIGH_SCORE_KEY = "highScore";
 
-    constructor(ctx, scaleRatio) {
+    constructor(ctx, scaleRatio, score=0) {
         this.ctx = ctx;
         this.canvas = ctx.canvas;
         this.scaleRatio = scaleRatio;
+        this.score = score;
     }
 
     update(frameTimeDelta) {
@@ -24,6 +24,7 @@ export default class Score{
     }
 
     draw() {
+        console.log(this.score);
         const highScore = Number(localStorage.getItem(this.HIGH_SCORE_KEY));
         const y = 20 * this.scaleRatio;
 
@@ -32,11 +33,11 @@ export default class Score{
         this.ctx.fillStyle = "#525250";
         const scoreX = this.canvas.width - 80 * this.scaleRatio;
         const highScoreX = scoreX - 125 * this.scaleRatio;
-        const scorePadded = Math.floor(this.score).toString().padStart(6, 0);
-        // Stored value already rounded down for high score
+        // const scorePadded = (this.score).toString().padStart(6, 0);
+        // // Stored value already rounded down for high score
         const highScorePadded = highScore.toString().padStart(6,0);
 
-        this.ctx.fillText(scorePadded, scoreX, y);
+        this.ctx.fillText(this.score, scoreX, y);
         this.ctx.fillText(`HI ${highScorePadded}`, highScoreX, y);
     }
 }

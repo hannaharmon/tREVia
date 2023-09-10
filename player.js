@@ -8,6 +8,7 @@ export default class Player {
     falling = false;
     JUMP_SPEED = 0.6;   // Going up (against gravity)
     GRAVITY = 0.4;
+    actions = 0;
 
     constructor(ctx, width, height, minJumpHeight, maxJumpHeight, scaleRatio) {
         this.ctx = ctx;
@@ -89,6 +90,7 @@ export default class Player {
         // Check if starting a jump
         if (this.jumpPressed) {
             this.jumpInProgress = true;
+
         }
 
         // Check if jumping upwards

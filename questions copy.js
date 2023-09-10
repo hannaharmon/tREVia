@@ -232,7 +232,12 @@ const nextButton = document.getElementById("next-btn");
 const scoreElement = document.getElementById("question-score")
 
 let currentQuestionIndex = 0;
-let score = 0;
+const searchParams = new URLSearchParams(window.location.search);
+let score = searchParams.get("score");
+
+function triggerGame() {
+    window.open(`http://127.0.0.1:5500/game.html?score=${score}`,"_self");
+}
 
 function startQuiz(){
     // currentQuestionIndex = currentQuestionIndex % 25;
@@ -242,7 +247,7 @@ function startQuiz(){
         currentQuestionIndex = currentQuestionIndex;
     }
     //score = 0;
-    scoreElement.innerHTML = `Score: ${score}`;
+    scoreElement.innerHTML = `Score: ${Math.floor(score)}`;
     showQuestion();
 }
 
@@ -277,7 +282,7 @@ function selectAnswer(e){
         selectedBtn.classList.add("correct");
         score++;
         scoreElement.innerHTML = `Score: ${score}`;
-        nextButton.innerHTML = "<a href='http://localhost:5500/game.html'>Keep Going!</a>";
+        nextButton.innerHTML = "<a onclick='triggerGame()'>Keep Going!</a>";
         nextButton.style.display = "block";
     }else{
         selectedBtn.classList.add("incorrect");
