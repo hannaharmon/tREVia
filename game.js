@@ -163,15 +163,12 @@ function reset() {
     // Tell game objects to reset
     background.reset();
     obstaclesController.reset();
-    searchParams = new URLSearchParams(window.location.search);
+    let searchParams = new URLSearchParams(window.location.search);
     let paramScore = searchParams.get("score");
     if (!paramScore) {
         score.reset();
     }
-    gameSpeed = GAME_SPEED_START;
-    const searchParams = new URLSearchParams(window.location.search);
-    score = new Score(ctx, scaleRatio, parseInt(searchParams.get("score")));
-    console.log(score.score);
+    gameSpeed = GAME_SPEED_START + score.score/100;
 }
 
 function showStartGameText() {
