@@ -28,9 +28,9 @@ export default class Score{
         const y = 20 * this.scaleRatio;
 
         const fontSize = 20 * this.scaleRatio;
-        this.ctx.font = `${fontSize}px serif`;
+        this.ctx.font = `${fontSize}px verdana`;
         this.ctx.fillStyle = "#525250";
-        const scoreX = this.canvas.width - 75 * this.scaleRatio;
+        const scoreX = this.canvas.width - 80 * this.scaleRatio;
         const highScoreX = scoreX - 125 * this.scaleRatio;
         const scorePadded = Math.floor(this.score).toString().padStart(6, 0);
         // Stored value already rounded down for high score

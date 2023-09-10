@@ -1,8 +1,8 @@
 import Obstacle from "./Obstacle.js";
 
 export default class ObstacleController {
-    OBSTACLE_INTERVAL_MIN = 500;
-    OBSTACLE_INTERVAL_MAX = 2000;
+    OBSTACLE_INTERVAL_MIN = 1000;
+    OBSTACLE_INTERVAL_MAX = 3000;
 
     nextObstacleInterval = null;
     obstacles = [];

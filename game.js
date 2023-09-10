@@ -7,10 +7,10 @@ const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
 const GAME_SPEED_START = 1;
-const GAME_SPEED_INCREMENT = 0.000001;
+const GAME_SPEED_INCREMENT = 0.00001;
 
 const GAME_WIDTH = 800;
-const GAME_HEIGHT = 400;
+const GAME_HEIGHT = 300;
 const PLAYER_WIDTH = 64;
 const PLAYER_HEIGHT = 64;
 const MAX_JUMP_HEIGHT = GAME_HEIGHT;
