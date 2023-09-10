@@ -142,6 +142,9 @@ function showGameOver() {
     const y = canvas.height / 2;
     // Actually show the text
     ctx.fillText("GAME OVER", x, y);
+    ctx.font = '40px Verdana';
+    ctx.fillText("Press SPACE to play again!",canvas.width / 4.5+150,y+60);
+
     canDoTrivia = true;
 }
 
