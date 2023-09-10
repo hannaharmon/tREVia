@@ -29,7 +29,7 @@ const OBSTACLES_CONFIG = [
 // Game Objects
 let player = null;
 let background = null;
-let obstacleController = null;
+let obstaclesController = null;
 
 let scaleRatio = null;
 let previousTime = null;
@@ -73,7 +73,7 @@ function createSprites() {
         };
     });
 
-    obstacleController = new ObstacleController(ctx, obstaclesImages, scaleRatio, GROUND_AND_OBSTACLES_SPEED);
+    obstaclesController = new ObstacleController(ctx, obstaclesImages, scaleRatio, GROUND_AND_OBSTACLES_SPEED);
 }
 
 function setScreen(){
@@ -134,15 +134,27 @@ function gameLoop(currentTime) {
 
     clearScreen();
 
-    // Update game objects
-    background.update(gameSpeed, frameTimeDelta);
-    obstacleController.update(gameSpeed, frameTimeDelta);
-    player.update(gameSpeed, frameTimeDelta);
+    if (!gameOver) {
+        // Update game objects
+        background.update(gameSpeed, frameTimeDelta);
+        obstaclesController.update(gameSpeed, frameTimeDelta);
+        player.update(gameSpeed, frameTimeDelta);
+    }
+
+    // Set game over if obstacle collision detected
+    if (!gameOver && obstaclesController.collideWith(player)){
+          gameOver = true;
+    }
 
     // Draw game objects
     background.draw();
-    obstacleController.draw();
+    obstaclesController.draw();
     player.draw();
+
+    // Game over screen
+    // if (gameOver) {
+    //     showGameOver
+    // }
 
     // Speed at which gameLoop is called is dependent on monitor refresh rate
     // and hardware of computer

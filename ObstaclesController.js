@@ -67,10 +67,16 @@ export default class ObstacleController {
 
         // Filter off screen obstacles
         this.obstacles = this.obstacles.filter(obstacle=>obstacle.x > -obstacle.width);
-        console.log(this.obstacles.length);
+        //console.log(this.obstacles.length);
     }
 
     draw() {
         this.obstacles.forEach((obstacle) => obstacle.draw());
+    }
+
+    collideWith(sprite) {
+        // Using some will let us know if there is at least
+        // one obstacle colliding with the player
+        return this.obstacles.some((obstacle) => obstacle.collideWith(sprite));
     }
 }
