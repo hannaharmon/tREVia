@@ -72,8 +72,14 @@ export default class Player {
     };
 
     update(gameSpeed, frameTimeDelta) {
-        //console.log(this.jumpPressed);
+
         this.run(gameSpeed, frameTimeDelta);
+
+        // Check if a jump is in progress
+        if (this.jumpInProgress) {
+            this.image = this.runImages[0];
+        }
+
         this.jump(frameTimeDelta);
     }
 
