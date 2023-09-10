@@ -99,7 +99,7 @@ body {
     font-weight: bold;
     width:1000px;
     margin-top: 10px;
-    margin-bottom:40px;
+    margin-bottom:10px;
 
 }
 .second-title {
@@ -108,11 +108,13 @@ body {
     font-weight: none ;
     text-align: center;
     font-style: italic;
+    border-radius:30px;
+    margin-bottom:0;
 
 }
 .center-title{
     font-size: 200px;
-    margin-top: 50;
+    margin-top: 50px;
     margin-bottom: 0;
 }
 .page-container h1{
@@ -154,9 +156,11 @@ button {
     background-color: #531010;
     color: white;
     font-family: 'Poppins', sans-serif;
-    border-radius: 3px;
+    border-radius: 10px;
     font-weight: bold;
     font-size: 20px;
+    width:400px;
+    padding-left:152px;
 
 }
 #start1 {
@@ -167,11 +171,11 @@ button {
     border-radius: 5px;
     font-weight: bold;
     font-size: 40px 60px;
-    margin-top: 50px;
+    margin-top: 200px;
     margin-bottom: 30px;
     font-size:40px;
     border-radius:5px;
-    width:400px;
+    width:600px;
     height:80px;
 
 }
@@ -182,12 +186,14 @@ button {
     font-family: 'Poppins', sans-serif;
     border-radius: 5px;
     font-weight: bold;
-    font-size: 40px 60px;
     margin-top: 50px;
     margin-bottom: 30px;
-    font-size:40px;
     width:400px;
-    height:300px;
+    height:200px;
+    padding-left:152px;
+    font-size: 400px;
+
+
 
 }
 #tamuHACK {
@@ -197,9 +203,10 @@ button {
     border-radius: 5px;
     font-weight: bold;
     height:50%;
+    padding-left:120px;
+
 }
 
-  
 
 
   #beginPage {
@@ -235,5 +242,6 @@ button {
     height: 5px;
     background-color: #470808;
     border: none;
+    margin-bottom:50px;
 }
 
