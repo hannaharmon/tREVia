@@ -165,9 +165,9 @@ const questions = [
         question: "In what year does an Aggie participate in the elephant walk?",
         answers:[
             {text: "Freshman", correct:false},
-            {text:"Sophomore", correct:true},
+            {text:"Sophomore", correct:false},
             {text:"Junior", correct:false},
-            {text:"Senior", correct:false}
+            {text:"Senior", correct:true}
         ]
     },
     {
