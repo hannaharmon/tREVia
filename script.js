@@ -1,16 +1,36 @@
+import Player from "./player.js";
+
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 200;
+const PLAYER_WIDTH = 32;
+const PLAYER_HEIGHT = 32;
+const MAX_JUMP_HEIGHT = GAME_HEIGHT;
+const MIN_JUMP_HEIGHT = 150;
+
+// Game Objects
+let player = null;
 
 let scaleRatio = null;
 let previousTime = null;
+
+function createSprites() {
+    // Figure out width and height of player based on scale ratio
+    const playerWidthInGame = PLAYER_WIDTH * scaleRatio;
+    const playerHeightInGame = PLAYER_HEIGHT * scaleRatio;
+    const minJumpHeightInGame = MIN_JUMP_HEIGHT * scaleRatio;
+    const maxJumpHeightInGame = MAX_JUMP_HEIGHT * scaleRatio;
+
+    player = new Player(ctx, playerWidthInGame, playerHeightInGame, minJumpHeightInGame, maxJumpHeightInGame, scaleRatio);
+}
 
 function setScreen(){
     scaleRatio = getScaleRatio();
     canvas.width = GAME_WIDTH*scaleRatio;
     canvas.height = GAME_HEIGHT*scaleRatio;
+    createSprites();
 }
 
 setScreen();
@@ -45,7 +65,7 @@ function getScaleRatio() {
 }
 
 function clearScreen() {
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "#Ffffea";
     ctx.fillRect(0,0,canvas.width, canvas.height);
 }
 
@@ -62,6 +82,13 @@ function gameLoop(currentTime) {
     const frameTimeDelta = currentTime - previousTime;
     previousTime = currentTime;
     clearScreen();
+
+    // Update game objects
+
+    // Draw game objects
+    player.draw();
+
+
     // Speed at which gameLoop is called is dependent on monitor refresh rate
     // and hardware of computer
     requestAnimationFrame(gameLoop);
