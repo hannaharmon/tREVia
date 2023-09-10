@@ -73,7 +73,11 @@ export default class Player {
     };
 
     update(gameSpeed, frameTimeDelta) {
-
+        let verticalSpeedScale = 4*gameSpeed/7;
+        if ((verticalSpeedScale) > 1){
+            this.JUMP_SPEED = 0.6*(verticalSpeedScale);   // Going up (against gravity)
+            this.GRAVITY = 0.4*(verticalSpeedScale);
+        }
         this.run(gameSpeed, frameTimeDelta);
 
         // Check if a jump is in progress
