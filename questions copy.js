@@ -30,9 +30,9 @@ const questions = [
         question: "The Fightin’ Texas Aggie Band is the largest military marching band in _______.",
         answers:[
             {text: "Texas", correct:false},
-            {text:"South", correct:false},
-            {text:"Southwest", correct:false},
-            {text:"United States", correct:true}
+            {text:"The South", correct:false},
+            {text:"The Southwest", correct:false},
+            {text:"The United States", correct:true}
         ]
     },
     {
@@ -101,8 +101,8 @@ const questions = [
     {
         question: "What is not typically true regarding the thumbs-up gesture?",
         answers:[
-            {text: "It is commonly done with the left hand", correct:false},
-            {text:"It shows the Aggie Ring", correct:true},
+            {text: "It is commonly done with the left hand", correct:true},
+            {text:"It shows the Aggie Ring", correct:false},
             {text:"It signals the Aggie Spirit", correct:false},
             {text:"All of these are true", correct:false}
         ]
@@ -165,9 +165,9 @@ const questions = [
         question: "In what year does an Aggie participate in the elephant walk?",
         answers:[
             {text: "Freshman", correct:false},
-            {text:"Sophomore", correct:true},
+            {text:"Sophomore", correct:false},
             {text:"Junior", correct:false},
-            {text:"Senior", correct:false}
+            {text:"Senior", correct:true}
         ]
     },
     {
@@ -207,7 +207,7 @@ const questions = [
         ]
     },
     {
-        question: " How many miles is the March to the Brazos walk that the Corps of Cadets does every spring as a fundraising campaign?",
+        question: "How many miles is the March to the Brazos walk that the Corps of Cadets does every spring as a fundraising campaign?",
         answers:[
             {text: "10", correct:false},
             {text:"15", correct:false},
