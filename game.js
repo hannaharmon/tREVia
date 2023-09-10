@@ -1,5 +1,6 @@
 import Player from "./Player.js";
 import Background from "./Background.js";
+import Clouds from "./Clouds.js";
 import ObstacleController from "./ObstaclesController.js";
 import Score from "./Score.js";
 
@@ -18,6 +19,9 @@ const MIN_JUMP_HEIGHT = 150;
 const BACKGROUND_WIDTH = 1280;
 const BACKGROUND_HEIGHT = 128;
 const BACKGROUND_SPEED = 0.3;
+const CLOUDS_WIDTH = 1280;
+const CLOUDS_HEIGHT = 128;
+const CLOUDS_SPEED = 0.2;
 const GROUND_WIDTH = 2560;
 const GROUND_HEIGHT = 256;
 const GROUND_AND_OBSTACLES_SPEED = 0.3;
@@ -40,6 +44,7 @@ let player = null;
 let background = null;
 let obstaclesController = null;
 let score = null;
+let clouds = null;
 
 let scaleRatio = null;
 let previousTime = null;
@@ -57,6 +62,8 @@ function createSprites() {
 
     const groundWidthInGame = BACKGROUND_WIDTH * scaleRatio;
     const groundHeightInGame = BACKGROUND_HEIGHT * scaleRatio;
+    const cloudsWidthInGame = CLOUDS_WIDTH * scaleRatio;
+    const cloudsHeightInGame = CLOUDS_HEIGHT * scaleRatio;
 
     player = new Player(
         ctx, 
@@ -72,6 +79,14 @@ function createSprites() {
         groundWidthInGame,
         groundHeightInGame,
         BACKGROUND_SPEED,
+        scaleRatio
+    );
+
+    clouds = new Clouds(
+        ctx,
+        cloudsWidthInGame,
+        cloudsHeightInGame,
+        CLOUDS_SPEED,
         scaleRatio
     );
 
@@ -219,6 +234,7 @@ function gameLoop(currentTime) {
             canDoTrivia = false;
         }
         background.update(gameSpeed, frameTimeDelta);
+        clouds.update(gameSpeed, frameTimeDelta);
         obstaclesController.update(gameSpeed, frameTimeDelta);
         player.update(gameSpeed, frameTimeDelta);
         score.update(frameTimeDelta);
@@ -234,6 +250,7 @@ function gameLoop(currentTime) {
 
     // Draw game objects
     background.draw();
+    clouds.draw();
     ctx.drawImage(groundImage, 0, canvas.height - GROUND_HEIGHT, GROUND_WIDTH, GROUND_HEIGHT);
     obstaclesController.draw();
     player.draw();
