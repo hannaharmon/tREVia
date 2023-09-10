@@ -139,6 +139,9 @@ function triggerTrivia() {
 }
 
 function showGameOver() {
+    // Player vertical scaling reset
+    player.JUMP_SPEED = 0.6;
+    player.GRAVITY = 0.4;
     const fontSize = 70 * scaleRatio;
     ctx.font = `${fontSize}px Verdana`;
     ctx.fillStyle = "grey";
