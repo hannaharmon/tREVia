@@ -1,13 +1,13 @@
 import Player from "./Player.js";
 import Background from "./Background.js";
 import ObstacleController from "./ObstaclesController.js";
-
+import Score from "./Score.js";
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
-const GAME_SPEED_START = .75;
-const GAME_SPEED_INCREMENT = 0.00001;
+const GAME_SPEED_START = 1;
+const GAME_SPEED_INCREMENT = 0.000001;
 
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 400;
@@ -30,12 +30,14 @@ const OBSTACLES_CONFIG = [
 let player = null;
 let background = null;
 let obstaclesController = null;
+let score = null;
 
 let scaleRatio = null;
 let previousTime = null;
 let gameSpeed = GAME_SPEED_START;
 let gameOver = false;
 let hasAddedEventListenersForRestart = false;
+let waitingToStart = true;
 
 function createSprites() {
     // Figure out width and height of player based on scale ratio
@@ -74,7 +76,13 @@ function createSprites() {
         };
     });
 
-    obstaclesController = new ObstacleController(ctx, obstaclesImages, scaleRatio, GROUND_AND_OBSTACLES_SPEED);
+    obstaclesController = new ObstacleController(ctx, 
+        obstaclesImages, 
+        scaleRatio, 
+        GROUND_AND_OBSTACLES_SPEED
+    );
+
+    score = new Score(ctx, scaleRatio);
 }
 
 function setScreen(){
@@ -140,10 +148,27 @@ function setupGameReset() {
 function reset() {
     hasAddedEventListenersForRestart = false;
     gameOver = false;
+    waitingToStart = false;
     // Tell game objects to reset
     background.reset();
     obstaclesController.reset();
+    score.reset();
     gameSpeed = GAME_SPEED_START;
+}
+
+function showStartGameText() {
+    const fontSize = 40 * scaleRatio;
+    ctx.font = `${fontSize}px Verdana`;
+    ctx.fillStyle = "grey";
+    // Center game over on screen
+    const x = canvas.width / 14;
+    const y = canvas.height / 2;
+    // Actually show the text
+    ctx.fillText("Press Space or Tap Screen To Start", x, y);
+}
+
+function updateGameSpeed(frameTimeDelta) {
+    gameSpeed += frameTimeDelta * GAME_SPEED_INCREMENT;
 }
 
 function clearScreen() {
@@ -152,6 +177,7 @@ function clearScreen() {
 }
 
 function gameLoop(currentTime) {
+    console.log(gameSpeed);
     if (previousTime === null) {
         // Will be entered on first call of gameLoop
         previousTime = currentTime;
@@ -166,27 +192,35 @@ function gameLoop(currentTime) {
 
     clearScreen();
 
-    if (!gameOver) {
+    if (!gameOver && !waitingToStart) {
         // Update game objects
         background.update(gameSpeed, frameTimeDelta);
         obstaclesController.update(gameSpeed, frameTimeDelta);
         player.update(gameSpeed, frameTimeDelta);
+        score.update(frameTimeDelta);
+        updateGameSpeed(frameTimeDelta);
     }
 
     // Set game over if obstacle collision detected
     if (!gameOver && obstaclesController.collideWith(player)){
           gameOver = true;
           setupGameReset();
+          score.setHighScore();
     }
 
     // Draw game objects
     background.draw();
     obstaclesController.draw();
     player.draw();
+    score.draw();
 
     // Game over screen
     if (gameOver) {
         showGameOver();
+    }
+
+    if (waitingToStart) {
+        showStartGameText();
     }
 
     // Speed at which gameLoop is called is dependent on monitor refresh rate
@@ -195,3 +229,6 @@ function gameLoop(currentTime) {
 }
 
 requestAnimationFrame(gameLoop);    // Calls a method when ready to repaint screen
+
+window.addEventListener("keyup", reset, {once:true});
+window.addEventListener("touchstart", reset, {once:true});
