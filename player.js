@@ -1,4 +1,8 @@
 export default class Player {
+    RUN_ANIMATION_TIMER = 200;
+    runAnimationTimer = this.RUN_ANIMATION_TIMER;
+    runImages = [];
+
     constructor(ctx, width, height, minJumpHeight, maxJumpHeight, scaleRatio) {
         this.ctx = ctx;
         this.canvas = ctx.canvas;
@@ -14,6 +18,13 @@ export default class Player {
         this.sittingStillImage = new Image();
         this.sittingStillImage.src = "Images/Rev32Sit1Scale250.png";
         this.image = this.sittingStillImage;
+
+        const runImage1 = new Image();
+        runImage1.src = ''
+    }
+
+    update(gameSpeed, frameTimeDelta) {
+
     }
 
     draw() {
