@@ -26,10 +26,10 @@ body {
     background-color: #681313;
     position: fixed;
     top: 0;
-    z-index: 2;
+    z-index: 5;
     padding: 5px 15px;
 }
-.topnav h1{
+.topnav h3{
     margin: 0px;
     padding: 14px 25px;
 }
@@ -55,11 +55,6 @@ body {
 }
 
 
-.cool-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 30px;
-    padding-left: 24px
-}
 
 .main {
     display: flex;
@@ -70,12 +65,18 @@ body {
     align-items: center;
     z-index: 3;
 }
+.cool-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 30px;
+    padding-left: 24px
+}
 
 .biggest-title {
     color: #681313;
     font-family:'Space Mono', monospace;
     font-size: 90px;
     font-weight: bold;
+    width:1000px;
 }
 .second-title {
     color: #681313;
@@ -84,6 +85,17 @@ body {
     text-align: center;
     font-style: italic;
 
+}
+.center-title{
+    font-size: 200px;
+}
+.page-container h1{
+    margin: 20px auto 20;
+    width:1000px;
+}
+.page-container h4{
+    margin: 20px auto 20;
+    font-size:30px;
 }
 a:link, a:active, a:visited{
     color:#ffffea;
@@ -128,6 +140,7 @@ button {
     border-radius: 2px;
     font-weight: bold;
     font-size: 20px;
+
 }
 #tamuHACK {
     background-color: #681313;
@@ -151,7 +164,10 @@ button {
 html {
     scroll-behavior: smooth;
     background-color: #ffffea;
-
+    display: flex;
+    align-items: center;
+    margin:auto;
+    max-width: 500px;
   }
 
   #beginPage {
@@ -164,8 +180,15 @@ html {
     height: 800px;
     background-color: #ffffea;
     z-index:1;
-    align-self:center;
     padding:2px;
+  }
+
+
+  .specialText{
+    color:#d9a066;
+  }
+  .smallFont{
+    font-size:50%;
   }
 
 

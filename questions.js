@@ -27,7 +27,7 @@ const questions = [
         ]
     },
     {
-        question: "The Fightin’ Texas Aggie Band is the largest military marching band in _______.",
+        question: "The Fightin' Texas Aggie Band is the largest military marching band in _______.",
         answers:[
             {text: "Texas", correct:false},
             {text:"South", correct:false},
@@ -90,7 +90,7 @@ const questions = [
         ]
     },
     {
-        question: "The term “Gig ‘Em” derived from the 1930 football game against which university?",
+        question: "The term “Gig 'Em” derived from the 1930 football game against which university?",
         answers:[
             {text: "Texas University", correct:false},
             {text:"Texas Christian University", correct:true},
