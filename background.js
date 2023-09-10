@@ -1,4 +1,4 @@
-export default class Ground {
+export default class Background {
     constructor(ctx, width, height, speed, scaleRatio) {
         this.ctx = ctx;
         this.canvas = ctx.canvas;
@@ -10,17 +10,17 @@ export default class Ground {
         this.x = 0;
         this.y = this.canvas.height - this.height;
 
-        this.groundImage = new Image();
-        this.groundImage.src = "Images/Background200.png";
+        this.backgroundImage = new Image();
+        this.backgroundImage.src = "Images/Background200.png";
     }
 
     update(gameSpeed, frameTimeDelta) {
-        this.x -= 1;
+        this.x -= gameSpeed * frameTimeDelta * this.speed * this.scaleRatio;
     }
 
     draw() {
         this.ctx.drawImage(
-            this.groundImage,
+            this.backgroundImage,
             this.x,
             this.y,
             this.width,
@@ -29,7 +29,7 @@ export default class Ground {
 
         // Draw another ground beside the first
         this.ctx.drawImage(
-            this.groundImage,
+            this.backgroundImage,
             this.x + this.width,
             this.y,
             this.width,

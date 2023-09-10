@@ -1,5 +1,5 @@
 import Player from "./player.js";
-import Ground from "./ground.js";
+import Background from "./background.js";
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
@@ -13,13 +13,13 @@ const PLAYER_WIDTH = 80;
 const PLAYER_HEIGHT = 80;
 const MAX_JUMP_HEIGHT = GAME_HEIGHT;
 const MIN_JUMP_HEIGHT = 150;
-const GROUND_WIDTH = 640;
-const GROUND_HEIGHT = 128;
-const GROUND_AND_OBSTACLE_SPEED = 0.5;
+const BACKGROUND_WIDTH = 640;
+const BACKGROUND_HEIGHT = 128;
+const BACKGROUND_SPEED = 0.3;
 
 // Game Objects
 let player = null;
-let ground = null;
+let background = null;
 
 let scaleRatio = null;
 let previousTime = null;
@@ -32,8 +32,8 @@ function createSprites() {
     const minJumpHeightInGame = MIN_JUMP_HEIGHT * scaleRatio;
     const maxJumpHeightInGame = MAX_JUMP_HEIGHT * scaleRatio;
 
-    const groundWidthInGame = GROUND_WIDTH * scaleRatio;
-    const groundHeightInGame = GROUND_HEIGHT * scaleRatio;
+    const groundWidthInGame = BACKGROUND_WIDTH * scaleRatio;
+    const groundHeightInGame = BACKGROUND_HEIGHT * scaleRatio;
 
     player = new Player(
         ctx, 
@@ -44,11 +44,11 @@ function createSprites() {
         scaleRatio
     );
 
-    ground = new Ground(
+    background = new Background(
         ctx,
         groundWidthInGame,
         groundHeightInGame,
-        GROUND_AND_OBSTACLE_SPEED,
+        BACKGROUND_SPEED,
         scaleRatio
     );
 }
@@ -112,10 +112,10 @@ function gameLoop(currentTime) {
     clearScreen();
 
     // Update game objects
-    ground.update(gameSpeed, frameTimeDelta);
+    background.update(gameSpeed, frameTimeDelta);
 
     // Draw game objects
-    ground.draw();
+    background.draw();
     player.draw();
 
     // Speed at which gameLoop is called is dependent on monitor refresh rate
