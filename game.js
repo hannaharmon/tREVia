@@ -1,5 +1,7 @@
-import Player from "./player.js";
-import Background from "./background.js";
+import Player from "./Player.js";
+import Background from "./Background.js";
+import ObstacleController from "./ObstacleController.js";
+
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
@@ -9,17 +11,25 @@ const GAME_SPEED_INCREMENT = 0.00001;
 
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 400;
-const PLAYER_WIDTH = 80;
-const PLAYER_HEIGHT = 80;
+const PLAYER_WIDTH = 64;
+const PLAYER_HEIGHT = 64;
 const MAX_JUMP_HEIGHT = GAME_HEIGHT;
 const MIN_JUMP_HEIGHT = 150;
 const BACKGROUND_WIDTH = 1280;
 const BACKGROUND_HEIGHT = 128;
 const BACKGROUND_SPEED = 0.3;
+const GROUND_AND_OBSTACLE_SPEED = 0.3;
+
+const OBSTACLE_CONFIG = [
+    {width:64, height:64, image:'Images/Longhorn.png'},
+    {width:64, height:128, image:'Images/VeoInTree.png'},
+    {width:64, height:128, image:'Images/ElephantWalk.png'}
+];
 
 // Game Objects
 let player = null;
 let background = null;
+let obstacleController = null;
 
 let scaleRatio = null;
 let previousTime = null;
@@ -51,6 +61,18 @@ function createSprites() {
         BACKGROUND_SPEED,
         scaleRatio
     );
+
+    const obstacleImages = OBSTACLE_CONFIG.map(obstacle => {
+        const image = new Image();
+        image.src = obstacle.image;
+        return {
+            image: image,
+            width: obstacle.width * scaleRatio,
+            heght: obstacle.height * scaleRatio
+        };
+    });
+
+    obstacleController = new ObstacleController(ctx, obstacleImages, scaleRatio, );
 }
 
 function setScreen(){
@@ -113,10 +135,12 @@ function gameLoop(currentTime) {
 
     // Update game objects
     background.update(gameSpeed, frameTimeDelta);
+    obstacleController.update(gameSpeed,frameTimeDelta);
     player.update(gameSpeed, frameTimeDelta);
 
     // Draw game objects
     background.draw();
+    obstacleController.draw();
     player.draw();
 
     // Speed at which gameLoop is called is dependent on monitor refresh rate
