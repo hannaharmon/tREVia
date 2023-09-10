@@ -241,13 +241,14 @@ function triggerGame() {
 
 function startQuiz(){
     // currentQuestionIndex = currentQuestionIndex % 25;
-    if(currentQuestionIndex >= question.length){
-        currentQuestionIndex = 0;
-    }else{
-        currentQuestionIndex = currentQuestionIndex;
-    }
+    // if(currentQuestionIndex >= question.length){
+    //     currentQuestionIndex = 0;
+    // }else{
+    //     currentQuestionIndex = currentQuestionIndex;
+    // }
     //score = 0;
     scoreElement.innerHTML = `Score: ${Math.floor(score)}`;
+    currentQuestionIndex = Math.floor(score/100) % 25;
     showQuestion();
 }
 
