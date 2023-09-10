@@ -1,3 +1,5 @@
+import Obstacle from "./Obstacle.js";
+
 export default class ObstacleController {
     OBSTACLE_INTERVAL_MIN = 500;
     OBSTACLE_INTERVAL_MAX = 2000;
@@ -32,16 +34,39 @@ export default class ObstacleController {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
+    // Spawn a randomly selected obstacle
+    createObstacle() {
+        const index =  this.getRandomNumber(0, this.obstacleImages.length - 1);
+        const obstacleImage = this.obstacleImages[index];
+        const x = this.canvas.width*1.5;  // Draw off-screen
+        const y = this.canvas.height - obstacleImage.height;
+        const obstacle = new Obstacle(
+            this.ctx, 
+            x, 
+            y, 
+            obstacleImage.width, 
+            obstacleImage.height,
+            obstacleImage.image
+        );
+
+        this.obstacles.push(obstacle);
+    }
+
     update(gameSpeed, frameTimeDelta) {
         if (this.nextObstacleInterval <= 0) {
-            // First, reset the timer
-            this.setNextObstacleTime();
             // Time to spawn an obstacle
+            this.createObstacle();
+            // Reset the timer
+            this.setNextObstacleTime();
         }
         this.nextObstacleInterval -= frameTimeDelta;
+
+        this.obstacles.forEach((obstacle) => {
+            obstacle.update(this.speed, gameSpeed, frameTimeDelta, this.scaleRatio);
+        });
     }
 
     draw() {
-
+        this.obstacles.forEach((obstacle) => obstacle.draw());
     }
 }
