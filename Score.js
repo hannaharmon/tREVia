@@ -32,11 +32,11 @@ export default class Score{
         this.ctx.fillStyle = "#525250";
         const scoreX = this.canvas.width - 80 * this.scaleRatio;
         const highScoreX = scoreX - 125 * this.scaleRatio;
-        // const scorePadded = (this.score).toString().padStart(6, 0);
-        // // Stored value already rounded down for high score
+        const scorePadded = (parseInt(this.score)).toString().padStart(6, 0);
+        // Stored value already rounded down for high score
         const highScorePadded = highScore.toString().padStart(6,0);
 
-        this.ctx.fillText(this.score, scoreX, y);
+        this.ctx.fillText(scorePadded, scoreX, y);
         this.ctx.fillText(`HI ${highScorePadded}`, highScoreX, y);
     }
 }
