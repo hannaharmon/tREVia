@@ -18,6 +18,8 @@ const MIN_JUMP_HEIGHT = 150;
 const BACKGROUND_WIDTH = 1280;
 const BACKGROUND_HEIGHT = 128;
 const BACKGROUND_SPEED = 0.3;
+const GROUND_WIDTH = 2560;
+const GROUND_HEIGHT = 256;
 const GROUND_AND_OBSTACLES_SPEED = 0.3;
 const TRIVIA_TIME = 10;
 
@@ -26,6 +28,9 @@ const OBSTACLES_CONFIG = [
     {width:64, height:128, image: 'Images/VeoInTree.png'},
     {width:106, height:64, image: 'Images/ElephantWalk.png'},
 ];
+
+let groundImage = new Image();
+groundImage.src = "Images/Ground.png";
 
 let canDoTrivia = true;
 var refreshIntervalId;
@@ -226,6 +231,7 @@ function gameLoop(currentTime) {
 
     // Draw game objects
     background.draw();
+    ctx.drawImage(groundImage, 0, canvas.height - GROUND_HEIGHT, GROUND_WIDTH, GROUND_HEIGHT);
     obstaclesController.draw();
     player.draw();
     score.draw();
