@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Handjet:wght@600&family=Space+Mono:wght@700&display=swap');
 
 body{
-    background:#681313;
+    background:#531010;
     font-family:'Space Mono', monospace;
 
 }
@@ -32,7 +32,7 @@ a:link, a:active, a:visited{
 }
 
 #next-btn{
-    background:red;
+    background:rgb(104, 13, 13);
     color: white;
     font-weight:300;
     font-family:'Space Mono', monospace;
@@ -44,6 +44,7 @@ a:link, a:active, a:visited{
     cursor: pointer;
     display: block;
     font-weight: bold;
+    align-items:center;
 }
 
 .btn{
