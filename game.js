@@ -176,7 +176,7 @@ function reset() {
     if (!paramScore) {
         score.reset();
     }
-    gameSpeed = GAME_SPEED_START + score.score/100;
+    gameSpeed = GAME_SPEED_START + score.score/1000;
 }
 
 function showStartGameText() {
