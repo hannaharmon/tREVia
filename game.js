@@ -142,6 +142,7 @@ function showGameOver() {
     const y = canvas.height / 2;
     // Actually show the text
     ctx.fillText("GAME OVER", x, y);
+    uhh = true;
 }
 
 function setupGameReset() {
