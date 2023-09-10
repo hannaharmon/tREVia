@@ -27,7 +27,7 @@ const OBSTACLES_CONFIG = [
     {width:106, height:64, image: 'Images/ElephantWalk.png'},
 ];
 
-let uhh = true;
+let canDoTrivia = true;
 var refreshIntervalId;
 
 // Game Objects
@@ -142,7 +142,7 @@ function showGameOver() {
     const y = canvas.height / 2;
     // Actually show the text
     ctx.fillText("GAME OVER", x, y);
-    uhh = true;
+    canDoTrivia = true;
 }
 
 function setupGameReset() {
@@ -206,9 +206,9 @@ function gameLoop(currentTime) {
 
     if (!gameOver && !waitingToStart) {
         // Update game objects
-        if (uhh) {
+        if (canDoTrivia) {
             refreshIntervalId = setInterval(function () {triggerTrivia()}, 10000);
-            uhh = false;
+            canDoTrivia = false;
         }
         background.update(gameSpeed, frameTimeDelta);
         obstaclesController.update(gameSpeed, frameTimeDelta);
