@@ -1,4 +1,4 @@
-const questions= [
+const questions = [
     {
         question: "How many Yell leaders are there and what are their grades?",
         answers:[
@@ -227,28 +227,55 @@ const questions= [
 ];
 
 const quesElement = document.getElementById("question");
-const answerButton = document.getElementById("answer-buttons");
+const answerButtons = document.getElementById("answer-buttons");
+const nextButton = document.getElementById("next-btn");
 let currentQuestionIndex = 0;
-
+let score = 0;
 function startQuiz(){
     currentQuestionIndex = 0;
-    showQuest();
+    score = 0;
+    nextButton.innerHTML = "Next";
+    showQuestion();
 }
-function showQuest(){
+function showQuestion(){
     resetState();
-    let currentQuest = questions[currentQuestIndex];
+    let currentQuest = questions[currentQuestionIndex];
+    let questionNo = currentQuestionIndex + 1;
+    questionElement.innerHTML = questionNo+ ". " + currentQuest.question;
     currentQuest.answers.forEach(answer =>{
         const button = document.createElement("button");
-        button.innerHTML - answer.text;
+        button.innerHTML = answer.text;
         button.classList.add("btn");
-        answerButton.appendChild(button);
+        answerButtons.appendChild(button);
+        if(answer.correct){
+            button.dataset.correct = answer.correct;
+        }
+        button.addEventListener("click",selectAnswer);
     });
 }
 
 function resetState(){
+    nextButton.style.display = "none";
     while(answerButtons.firstChild){
         answerButtons.removeChild(answerButtons.firstChild);
     }
+}
+function selectAnswer(e){
+    const selectedBtn = e.target;
+    const isCorrect = selectedBtn.dataset.correct === "true";
+    if(isCorrect){
+        selectedBtn.classList.add("correct");
+    }else{
+        selectedBtn.classList.add("incorrect");
+}
+Array.from(answerButtons.children).forEach(button => {
+    if(button.dataset.correct === "true"){
+        button.classList.add("correct");
+    }
+    button.disabled = true;
+
+});
+nextButton.style.display = "block";
 }
 
 startQuiz();
