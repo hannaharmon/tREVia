@@ -229,14 +229,20 @@ const questions = [
 const questElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
+const scoreElement = document.getElementById("question-score")
 
 let currentQuestionIndex = 0;
 let score = 0;
 
 function startQuiz(){
-    currentQuestionIndex = 0;
-    score = 0;
-    nextButton.innerHTML = "<a href='http://localhost:5500/game.html'>Return</a>";
+    // currentQuestionIndex = currentQuestionIndex % 25;
+    if(currentQuestionIndex >= question.length){
+        currentQuestionIndex = 0;
+    }else{
+        currentQuestionIndex = currentQuestionIndex;
+    }
+    //score = 0;
+    scoreElement.innerHTML = `Score: ${score}`;
     showQuestion();
 }
 
@@ -270,8 +276,14 @@ function selectAnswer(e){
     if(isCorrect){
         selectedBtn.classList.add("correct");
         score++;
+        scoreElement.innerHTML = `Score: ${score}`;
+        nextButton.innerHTML = "<a href='http://localhost:5500/game.html'>Keep Going!</a>";
+        nextButton.style.display = "block";
     }else{
         selectedBtn.classList.add("incorrect");
+        score=0;
+        nextButton.innerHTML = "<a href='http://localhost:5500/game.html'>Start Over</a>";
+        nextButton.style.display = "block";
     }
 
     Array.from(answerButtons.children).forEach(button => {
@@ -281,7 +293,6 @@ function selectAnswer(e){
         button.disabled = true;
     }); 
     //nextButton.innerHTML = "Return";
-    nextButton.style.display = "block";
 }
 
 // function showScore(){
