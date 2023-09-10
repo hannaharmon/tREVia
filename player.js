@@ -16,15 +16,36 @@ export default class Player {
         this.y = this.canvas.height - this.height - 1.5 * scaleRatio;  // stand on bottom of screen
     
         this.sittingStillImage = new Image();
-        this.sittingStillImage.src = "Images/Rev32Sit1Scale250.png";
+        this.sittingStillImage.src = "Images/Rev32Sit1px64.png";
         this.image = this.sittingStillImage;
 
         const runImage1 = new Image();
-        runImage1.src = ''
+        runImage1.src = 'Images/Rev32Run1px64.png';
+        const runImage2 = new Image();
+        runImage2.src = 'Images/Rev32Run2px64.png';
+
+        this.runImages.push(runImage1);
+        this.runImages.push(runImage2);
     }
 
     update(gameSpeed, frameTimeDelta) {
+        this.run(gameSpeed, frameTimeDelta);
+    }
 
+    run(gameSpeed, frameTimeDelta) {
+        if (this.runAnimationTimer <= 0) {
+            // Time to switch images
+            if (this.image == this.runImages[0]) {
+                this.image = this.runImages[1];
+            }
+            else {
+                this.image = this.runImages[0];
+            }
+            this.runAnimationTimer = this.RUN_ANIMATION_TIMER;
+        }
+
+        // Ensures that player moves at same rate regardless of refresh rate
+        this.runAnimationTimer -= frameTimeDelta * gameSpeed;
     }
 
     draw() {
