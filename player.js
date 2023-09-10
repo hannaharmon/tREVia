@@ -12,7 +12,7 @@ export default class Player {
         this.y = this.canvas.height - this.height - 1.5 * scaleRatio;  // stand on bottom of screen
     
         this.sittingStillImage = new Image();
-        this.sittingStillImage.src = "Images/Rev32Sit1.png";
+        this.sittingStillImage.src = "Images/Rev32Sit1Scale250.png";
         this.image = this.sittingStillImage;
     }
 
