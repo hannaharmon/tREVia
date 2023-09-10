@@ -187,11 +187,12 @@ button {
     border-radius: 5px;
     font-weight: bold;
     margin-top: 50px;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
     width:400px;
     height:200px;
-    padding-left:152px;
     font-size: 400px;
+    padding-left:72px;
+    align-items:center;
 
 
 
@@ -243,5 +244,11 @@ button {
     background-color: #470808;
     border: none;
     margin-bottom:50px;
+}
+
+#sizeChange{
+    font-size:80px;
+    padding-left: -110px;
+    margin:0px
 }
 
