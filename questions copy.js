@@ -236,7 +236,7 @@ let score = 0;
 function startQuiz(){
     currentQuestionIndex = 0;
     score = 0;
-    nextButton.innerHTML = "Return";
+    nextButton.innerHTML = "<a href='http://localhost:5500/game.html'>Return</a>";
     showQuestion();
 }
 

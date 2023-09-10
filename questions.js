@@ -215,15 +215,15 @@ const questions = [
             {text:"22", correct:false}
         ]
     },
-    // {
-    //     question: "What is the oldest student organization on campus, established in 1876?",
-    //     answers:[
-    //         {text: "Corps of Cadets", correct:true},
-    //         {text:"SEC", correct:false},
-    //         {text:"Student Council", correct:false},
-    //         {text:"Association of Former Students", correct:false}
-    //     ]
-    // }
+    {
+        question: "What is the oldest student organization on campus, established in 1876?",
+        answers:[
+            {text: "Corps of Cadets", correct:true},
+            {text:"SEC", correct:false},
+            {text:"Student Council", correct:false},
+            {text:"Association of Former Students", correct:false}
+        ]
+    }
 ];
 
 const questElement = document.getElementById("question");

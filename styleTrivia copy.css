@@ -25,10 +25,17 @@ body{
 .quiz{
     padding:20px 0;
 }
+
+a:link, a:active, a:visited{
+    color:#ffffea;
+    text-decoration: none;
+}
+
 #next-btn{
     background:red;
     color: white;
     font-weight:300;
+    font-family:'Space Mono', monospace;
     width:150px;
     border: 0;
     padding: 10px;
@@ -36,7 +43,9 @@ body{
     border-radius: 4px;
     cursor: pointer;
     display: block;
+    font-weight: bold;
 }
+
 .btn{
     background:#ffffea;
     width:100%;
