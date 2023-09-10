@@ -25,7 +25,7 @@ export default class ObstacleController {
         );
 
         this.nextObstacleInterval = num;
-        console.log(this.nextObstacleInterval);
+        //console.log(this.nextObstacleInterval);
     }
 
     // Gets a random number between min and max
@@ -64,6 +64,10 @@ export default class ObstacleController {
         this.obstacles.forEach((obstacle) => {
             obstacle.update(this.speed, gameSpeed, frameTimeDelta, this.scaleRatio);
         });
+
+        // Filter off screen obstacles
+        this.obstacles = this.obstacles.filter(obstacle=>obstacle.x > -obstacle.width);
+        console.log(this.obstacles.length);
     }
 
     draw() {

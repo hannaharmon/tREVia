@@ -34,6 +34,7 @@ let obstacleController = null;
 let scaleRatio = null;
 let previousTime = null;
 let gameSpeed = GAME_SPEED_START;
+let gameOver = false;
 
 function createSprites() {
     // Figure out width and height of player based on scale ratio
