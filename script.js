@@ -1,20 +1,29 @@
 import Player from "./player.js";
+import Ground from "./ground.js";
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
+const GAME_SPEED_START = .75;
+const GAME_SPEED_INCREMENT = 0.00001;
+
 const GAME_WIDTH = 800;
-const GAME_HEIGHT = 200;
+const GAME_HEIGHT = 400;
 const PLAYER_WIDTH = 80;
 const PLAYER_HEIGHT = 80;
 const MAX_JUMP_HEIGHT = GAME_HEIGHT;
 const MIN_JUMP_HEIGHT = 150;
+const GROUND_WIDTH = 640;
+const GROUND_HEIGHT = 128;
+const GROUND_AND_OBSTACLE_SPEED = 0.5;
 
 // Game Objects
 let player = null;
+let ground = null;
 
 let scaleRatio = null;
 let previousTime = null;
+let gameSpeed = GAME_SPEED_START;
 
 function createSprites() {
     // Figure out width and height of player based on scale ratio
@@ -23,7 +32,25 @@ function createSprites() {
     const minJumpHeightInGame = MIN_JUMP_HEIGHT * scaleRatio;
     const maxJumpHeightInGame = MAX_JUMP_HEIGHT * scaleRatio;
 
-    player = new Player(ctx, playerWidthInGame, playerHeightInGame, minJumpHeightInGame, maxJumpHeightInGame, scaleRatio);
+    const groundWidthInGame = GROUND_WIDTH * scaleRatio;
+    const groundHeightInGame = GROUND_HEIGHT * scaleRatio;
+
+    player = new Player(
+        ctx, 
+        playerWidthInGame, 
+        playerHeightInGame, 
+        minJumpHeightInGame, 
+        maxJumpHeightInGame, 
+        scaleRatio
+    );
+
+    ground = new Ground(
+        ctx,
+        groundWidthInGame,
+        groundHeightInGame,
+        GROUND_AND_OBSTACLE_SPEED,
+        scaleRatio
+    );
 }
 
 function setScreen(){
@@ -81,13 +108,15 @@ function gameLoop(currentTime) {
     // regardless of hardware differences
     const frameTimeDelta = currentTime - previousTime;
     previousTime = currentTime;
+
     clearScreen();
 
     // Update game objects
+    ground.update(gameSpeed, frameTimeDelta);
 
     // Draw game objects
+    ground.draw();
     player.draw();
-
 
     // Speed at which gameLoop is called is dependent on monitor refresh rate
     // and hardware of computer
