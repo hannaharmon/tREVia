@@ -35,6 +35,7 @@ let scaleRatio = null;
 let previousTime = null;
 let gameSpeed = GAME_SPEED_START;
 let gameOver = false;
+let hasAddedEventListenersForRestart = false;
 
 function createSprites() {
     // Figure out width and height of player based on scale ratio
@@ -114,6 +115,37 @@ function getScaleRatio() {
     }
 }
 
+function showGameOver() {
+    const fontSize = 70 * scaleRatio;
+    ctx.font = `${fontSize}px Verdana`;
+    ctx.fillStyle = "grey";
+    // Center game over on screen
+    const x = canvas.width / 4.5;
+    const y = canvas.height / 2;
+    // Actually show the text
+    ctx.fillText("GAME OVER", x, y);
+}
+
+function setupGameReset() {
+    if(!hasAddedEventListenersForRestart) {
+        hasAddedEventListenersForRestart = true;
+
+        setTimeout(()=>{
+            window.addEventListener("keyup", reset, {once:true});
+            window.addEventListener("touchstart", reset, {once:true});
+        }, 1000);
+    }
+}
+
+function reset() {
+    hasAddedEventListenersForRestart = false;
+    gameOver = false;
+    // Tell game objects to reset
+    background.reset();
+    obstaclesController.reset();
+    gameSpeed = GAME_SPEED_START;
+}
+
 function clearScreen() {
     ctx.fillStyle = "#Ffffea";
     ctx.fillRect(0,0,canvas.width, canvas.height);
@@ -144,6 +176,7 @@ function gameLoop(currentTime) {
     // Set game over if obstacle collision detected
     if (!gameOver && obstaclesController.collideWith(player)){
           gameOver = true;
+          setupGameReset();
     }
 
     // Draw game objects
@@ -152,9 +185,9 @@ function gameLoop(currentTime) {
     player.draw();
 
     // Game over screen
-    // if (gameOver) {
-    //     showGameOver
-    // }
+    if (gameOver) {
+        showGameOver();
+    }
 
     // Speed at which gameLoop is called is dependent on monitor refresh rate
     // and hardware of computer

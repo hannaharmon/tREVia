@@ -79,4 +79,8 @@ export default class ObstacleController {
         // one obstacle colliding with the player
         return this.obstacles.some((obstacle) => obstacle.collideWith(sprite));
     }
+
+    reset() {
+        this.obstacles = [];
+    }
 }
