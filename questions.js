@@ -27,7 +27,7 @@ const questions = [
         ]
     },
     {
-        question: "The Fightin’ Texas Aggie Band is the largest military marching band in _______.",
+        question: "The Fightin' Texas Aggie Band is the largest military marching band in _______.",
         answers:[
             {text: "Texas", correct:false},
             {text:"South", correct:false},
@@ -90,7 +90,7 @@ const questions = [
         ]
     },
     {
-        question: "The term “Gig ‘Em” derived from the 1930 football game against which university?",
+        question: "The term “Gig 'Em” derived from the 1930 football game against which university?",
         answers:[
             {text: "Texas University", correct:false},
             {text:"Texas Christian University", correct:true},
@@ -226,7 +226,7 @@ const questions = [
     }
 ];
 
-const quesElement = document.getElementById("question");
+const questElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
 let currentQuestionIndex = 0;
@@ -241,7 +241,7 @@ function showQuestion(){
     resetState();
     let currentQuest = questions[currentQuestionIndex];
     let questionNo = currentQuestionIndex + 1;
-    questionElement.innerHTML = questionNo+ ". " + currentQuest.question;
+    questElement.innerHTML = questionNo+ ". " + currentQuest.question;
     currentQuest.answers.forEach(answer =>{
         const button = document.createElement("button");
         button.innerHTML = answer.text;
