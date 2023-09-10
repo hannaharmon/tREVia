@@ -70,7 +70,10 @@ a:link, a:active, a:visited{
 }
 .correct{
     background:green;
+    color: #ffffea;
 }
 .incorrect{
     background:red;
+    color: #ffffea;
+
 }

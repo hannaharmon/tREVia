@@ -39,6 +39,7 @@ body{
 }
 .btn{
     background:#ffffea;
+    font-color:black;
     width:100%;
     border:2px;
     padding: 15px;
@@ -57,7 +58,10 @@ body{
 }
 .correct{
     background:green;
+    color: #ffffea;
 }
 .incorrect{
     background:red;
+    color: #ffffea;
+
 }
