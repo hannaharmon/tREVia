@@ -255,8 +255,7 @@ function startQuiz(){
 function showQuestion(){
     resetState();
     let currentQuest = questions[currentQuestionIndex];
-    let questionNo = currentQuestionIndex + 1;
-    questElement.innerHTML = questionNo + ". " + currentQuest.question;
+    questElement.innerHTML = currentQuest.question;
     currentQuest.answers.forEach(answer =>{
         const button = document.createElement("button");
         button.innerHTML = answer.text;
@@ -281,8 +280,7 @@ function selectAnswer(e){
     const isCorrect = selectedBtn.dataset.correct === "true";
     if(isCorrect){
         selectedBtn.classList.add("correct");
-        score++;
-        scoreElement.innerHTML = `Score: ${score}`;
+        // scoreElement.innerHTML = `Score: ${score}`;
         nextButton.innerHTML = "<a onclick='triggerGame()'>Keep Going!</a>";
         nextButton.style.display = "block";
     }else{
