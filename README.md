@@ -1,2 +1,2 @@
 # tREVia
-## [Check it out!](https://trevia.pages.dev/)
+<a href="https://trevia.pages.dev/" target="_blank">Check it out!</a>
