@@ -1,8 +1,8 @@
-import Player from "./Player.js";
-import Background from "./Background.js";
-import Clouds from "./Clouds.js";
-import ObstacleController from "./ObstaclesController.js";
-import Score from "./Score.js";
+import Player from "./player.mjs";
+import Background from "./background.mjs";
+import Clouds from "./Clouds.mjs";
+import ObstacleController from "./ObstaclesController.mjs";
+import Score from "./Score.mjs";
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
@@ -150,7 +150,7 @@ function getScaleRatio() {
 }
 
 function triggerTrivia() {
-    window.open(`http://127.0.0.1:5500/triviatest.html?score=${score.score}`,"_self");
+    window.open(`triviatest.html?score=${score.score}`,"_self");
 }
 
 function showGameOver() {

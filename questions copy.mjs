@@ -27,12 +27,12 @@ const questions = [
         ]
     },
     {
-        question: "The Fightin' Texas Aggie Band is the largest military marching band in _______.",
+        question: "The Fightin’ Texas Aggie Band is the largest military marching band in _______.",
         answers:[
             {text: "Texas", correct:false},
-            {text:"South", correct:false},
-            {text:"Southwest", correct:false},
-            {text:"United States", correct:true}
+            {text:"The South", correct:false},
+            {text:"The Southwest", correct:false},
+            {text:"The United States", correct:true}
         ]
     },
     {
@@ -90,7 +90,7 @@ const questions = [
         ]
     },
     {
-        question: "The term “Gig 'Em” derived from the 1930 football game against which university?",
+        question: "The term “Gig ‘Em” derived from the 1930 football game against which university?",
         answers:[
             {text: "Texas University", correct:false},
             {text:"Texas Christian University", correct:true},
@@ -101,8 +101,8 @@ const questions = [
     {
         question: "What is not typically true regarding the thumbs-up gesture?",
         answers:[
-            {text: "It is commonly done with the left hand", correct:false},
-            {text:"It shows the Aggie Ring", correct:true},
+            {text: "It is commonly done with the left hand", correct:true},
+            {text:"It shows the Aggie Ring", correct:false},
             {text:"It signals the Aggie Spirit", correct:false},
             {text:"All of these are true", correct:false}
         ]
@@ -165,9 +165,9 @@ const questions = [
         question: "In what year does an Aggie participate in the elephant walk?",
         answers:[
             {text: "Freshman", correct:false},
-            {text:"Sophomore", correct:true},
+            {text:"Sophomore", correct:false},
             {text:"Junior", correct:false},
-            {text:"Senior", correct:false}
+            {text:"Senior", correct:true}
         ]
     },
     {
@@ -207,7 +207,7 @@ const questions = [
         ]
     },
     {
-        question: " How many miles is the March to the Brazos walk that the Corps of Cadets does every spring as a fundraising campaign?",
+        question: "How many miles is the March to the Brazos walk that the Corps of Cadets does every spring as a fundraising campaign?",
         answers:[
             {text: "10", correct:false},
             {text:"15", correct:false},
@@ -229,19 +229,33 @@ const questions = [
 const questElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
+const scoreElement = document.getElementById("question-score")
+
 let currentQuestionIndex = 0;
-let score = 0;
+const searchParams = new URLSearchParams(window.location.search);
+let score = searchParams.get("score");
+
+function triggerGame() {
+    window.open(`game.html?score=${score}`,"_self");
+}
+
 function startQuiz(){
-    currentQuestionIndex = 0;
-    score = 0;
-    nextButton.innerHTML = "Next";
+    // currentQuestionIndex = currentQuestionIndex % 25;
+    // if(currentQuestionIndex >= question.length){
+    //     currentQuestionIndex = 0;
+    // }else{
+    //     currentQuestionIndex = currentQuestionIndex;
+    // }
+    //score = 0;
+    scoreElement.innerHTML = `Score: ${Math.floor(score)}`;
+    currentQuestionIndex = Math.floor(score/100) % 25;
     showQuestion();
 }
+
 function showQuestion(){
     resetState();
     let currentQuest = questions[currentQuestionIndex];
-    let questionNo = currentQuestionIndex + 1;
-    questElement.innerHTML = questionNo+ ". " + currentQuest.question;
+    questElement.innerHTML = currentQuest.question;
     currentQuest.answers.forEach(answer =>{
         const button = document.createElement("button");
         button.innerHTML = answer.text;
@@ -260,22 +274,62 @@ function resetState(){
         answerButtons.removeChild(answerButtons.firstChild);
     }
 }
+
 function selectAnswer(e){
     const selectedBtn = e.target;
     const isCorrect = selectedBtn.dataset.correct === "true";
     if(isCorrect){
         selectedBtn.classList.add("correct");
+        // scoreElement.innerHTML = `Score: ${score}`;
+        nextButton.innerHTML = "<a onclick='triggerGame()'>Keep Going!</a>";
+        nextButton.style.display = "block";
     }else{
         selectedBtn.classList.add("incorrect");
-}
-Array.from(answerButtons.children).forEach(button => {
-    if(button.dataset.correct === "true"){
-        button.classList.add("correct");
+        score=0;
+        nextButton.innerHTML = "<a href='game.html'>Start Over</a>";
+        nextButton.style.display = "block";
     }
-    button.disabled = true;
 
-});
-nextButton.style.display = "block";
+    Array.from(answerButtons.children).forEach(button => {
+        if(button.dataset.correct === "true"){
+            button.classList.add("correct");
+        }
+        button.disabled = true;
+    }); 
+    //nextButton.innerHTML = "Return";
 }
+
+// function showScore(){
+//     //resetState();
+//     questionElement.innerHTML = 'Return!';
+//     nextButton.innerHTML = "Play Again";
+//     nextButton.style.display = "block";
+// }
+
+// function handleNextButton(){
+//     // currentQuestionIndex++;
+//     // if(currentQuestionIndex < questions.length){
+//     //     showQuestion();
+//     // }else{
+//     //     showScore();
+//     // }
+// }
+
+nextButton.addEventListener("click", ()=>{
+    currentQuestionIndex++;
+
+    //showQuestion();
+    // test
+    // currentQuestionIndex++;
+    // questionElement.innerHTML = 'Test text';
+    // nextButton.innerHTML = "Play Again";
+    // nextButton.style.display = "block";
+
+    // if(currentQuestionIndex < questions.length){
+    //     handleNextButton();
+    // }else{
+    //     startQuiz();
+    // }
+})
 
 startQuiz();

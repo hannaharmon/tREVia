@@ -1,4 +1,4 @@
-import Obstacle from "./Obstacle.js";
+import Obstacle from "./Obstacle.mjs";
 
 export default class ObstacleController {
     OBSTACLE_INTERVAL_MIN = 1000;
